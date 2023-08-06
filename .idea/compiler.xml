@@ -10,5 +10,8 @@
         <module name="crm-mybatis-generator" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="un" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

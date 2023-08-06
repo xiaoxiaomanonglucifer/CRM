@@ -28,7 +28,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   </filter-mapping>
   <!-- Spring mvc分发servlet -->
   <servlet>
-    <servlet-name>dispatcher</servlet-name>
+    <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
@@ -37,15 +37,16 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>dispatcher</servlet-name>
+    <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
   <servlet-mapping>
-    <servlet-name>dispatcher</servlet-name>
+    <servlet-name>springmvc</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   <!-- 欢迎页，默认进入index controller -->
-  <welcome-file-list>
-    <welcome-file>/</welcome-file>
-  </welcome-file-list>
+<!--  <welcome-file-list>-->
+<!--    <welcome-file></welcome-file>-->
+<!--  </welcome-file-list>-->
 </web-app>

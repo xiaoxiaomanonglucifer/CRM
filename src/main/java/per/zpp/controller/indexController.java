@@ -12,8 +12,8 @@ public class indexController {
         @RequestMapping("/")
     public String index(){
             //请求转发地址不会变 前缀不会变，不能用重定向
-//        return "/WEB-INF/pages/index.jsp"; 完整路径写法
-            return "/index";//配置了视图解析器之后的写法(加了前缀和后缀)
+//        return "/WEB-INF/pages/first.jsp"; 完整路径写法
+            return "index";//配置了视图解析器之后的写法(加了前缀和后缀)
     }
 
 }
