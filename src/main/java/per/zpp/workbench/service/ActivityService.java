@@ -18,4 +18,10 @@ public interface ActivityService {
     Activity queryActivityById(String id);
 
     int editActivity(Activity activity);
+    List<Activity> selectAllActivity();
+    List<Activity> selectActivityById(String []ids);
+
+    int saveActivityByList(List<Activity> activityList);
+
+    Activity selectActivityDetailById(String id);
 }

@@ -98,7 +98,7 @@
                 if (startDate != "" && endDate != "") {
                     //方法1将字符串转成Date对象 比较毫秒数
                     //方法2直接比较字符串
-                    if (endDate <=startDate) {
+                    if (endDate <= startDate) {
                         alert("结束日期不能比开始日期小~");
                         return;
                     }
@@ -129,7 +129,7 @@
                             //保存成功后1.关闭模态窗口
                             $("#editActivityModal").modal("hide");
                             alert("修改成功")
-                            $("#checkAll").prop("checked",false);
+                            $("#checkAll").prop("checked", false);
                             // 刷新市场活动列，显示更新候的数据所在页面
                             queryActivityByConditionForPage($("#demo_pag1").bs_pagination('getOption', 'currentPage'),
                                 $("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
@@ -194,7 +194,7 @@
                             queryActivityByConditionForPage(1, $("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
                         } else {
                             alert(resp.message);
-                            $("#createActivityModal").modal("show");
+                            $("#createActivityModal").modal("show")
                         }
                     }
                 });
@@ -253,6 +253,63 @@
                 }
             });
 
+            $("#exportActivityAllBtn").click(function () {
+                window.location.href = "workbench/activity/exportAllActivities";
+            })
+            $("#exportActivityXzBtn").click(function () {//// id的格式为：id=xxx&id=xxx&id=xxx&id=xxx&id=xxx..
+                var activityIds = $("#tBody input[type='checkbox']:checked");
+                if (activityIds.size() == 0) {
+                    alert("请选择你要导出的数据~");
+                    return;
+                }
+                var id = "?";
+                $.each(activityIds, function () {
+                    id += "id=" + this.value + "&";
+                });
+                id = id.substr(0, id.length - 1)//将最后面一个&去掉
+                window.location.href = "workbench/activity/exportActivityByIds" + id;
+                //地址栏?id=xxx&id=xxx&id=xxx
+            });
+            $("#importActivityBtn").click(function () {
+                var activityFileName = $("#activityFile").val();
+                var suffix = activityFileName.substr(activityFileName.lastIndexOf(".") + 1);
+                suffix = suffix.toLocaleLowerCase();
+                if (suffix != "xls") {
+                    alert("只支持xls文件");
+                    return;
+                }
+                var activityFile = $("#activityFile")[0].files[0];
+                if (activityFile.size > 5 * 1024 * 1024) {
+                    alert("文件大小不能超过5MB");
+                    return;
+                }
+                // FormData是ajax提供的接口,可以模拟键值对向后台提交参数;
+                // FormData最大的优势是不但能提交文本数据，还能提交二进制数据
+                var formData = new FormData();
+                formData.append("activityFile", activityFile);
+                $.ajax({
+                    url: 'workbench/activity/importActivity',
+                    type: 'POST',
+                    processData: false, // 设置ajax向后台提交参数之前，是否把参数统一转换成字符串：true--是,false--不是,默认是true
+                    contentType: false, // 设置ajax向后台提交参数之前，是否把所有的参数统一按urlencoded编码：true--是,false--不是，默认是true
+                    data: formData,
+                    success: function (resp) {
+                        if (resp.code == "1") {
+                            //提示导入成功的记录数
+                            alert("成功导入" + resp.retData + "条记录");
+                            $("#importActivityModal").modal("hide");
+                            queryActivityByConditionForPage(1, $("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
+                        } else {
+                            // 提示信息
+                            alert(data.message);
+                            // 模态窗口不关闭
+                            $("#importActivityModal").modal("show");
+                        }
+                    }
+                });
+
+
+            })
 
         });
 
@@ -289,7 +346,7 @@
                         htmlStr += "<tr class=\"active\">\n" +
                             "                            <td><input type=\"checkbox\"  value=\"" + e.id + "\"/></td>\n" +
                             "                            <td><a style=\"text-decoration: none; cursor: pointer;\"\n" +
-                            "                        onclick=\"window.location.href='detail.html';\">" + e.name + "</a></td>\n" +
+                            "                        onclick=\"window.location.href='workbench/activity/toDetailIndex?id="+e.id+"';\">" + e.name + "</a></td>\n" +
                             "                        <td>" + e.owner + "</td>\n" +
                             "                        <td>" + e.startDate + "</td>\n" +
                             "                        <td>" + e.endDate + "</td>\n" +
@@ -418,7 +475,7 @@
 
                 <form class="form-horizontal" role="form">
                     <!--设置一个隐藏标签，用来存放id，供后面修改数据时操作-->
-                    <input type="hidden" id="edit-id" >
+                    <input type="hidden" id="edit-id">
                     <div class="form-group">
                         <label for="edit-marketActivityOwner" id="owner" class="col-sm-2 control-label">所有者<span
                                 style="font-size: 15px; color: red;">*</span></label>
@@ -597,7 +654,7 @@
                 <%--                <tr class="active">--%>
                 <%--                    <td><input type="checkbox"/></td>--%>
                 <%--                    <td><a style="text-decoration: none; cursor: pointer;"--%>
-                <%--                           onclick="window.location.href='detail.html';">发传单</a></td>--%>
+                <%--                           onclick="window.location.href='detail.jsp';">发传单</a></td>--%>
                 <%--                    <td>zhangsan</td>--%>
                 <%--                    <td>2020-10-10</td>--%>
                 <%--                    <td>2020-10-20</td>--%>
@@ -605,7 +662,7 @@
                 <%--                <tr class="active">--%>
                 <%--                    <td><input type="checkbox"/></td>--%>
                 <%--                    <td><a style="text-decoration: none; cursor: pointer;"--%>
-                <%--                           onclick="window.location.href='detail.html';">发传单</a></td>--%>
+                <%--                           onclick="window.location.href='detail.jsp';">发传单</a></td>--%>
                 <%--                    <td>zhangsan</td>--%>
                 <%--                    <td>2020-10-10</td>--%>
                 <%--                    <td>2020-10-20</td>--%>
