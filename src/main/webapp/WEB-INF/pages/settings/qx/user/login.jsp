@@ -20,7 +20,7 @@
 						$("#loginBtn").click()
 						//按回车登录
 					}
-				})
+				});
 
 			$("#loginBtn").click(function () {
 <%--				<%=	 System.out.println("路径等于"+request.getContextPath())%>--%>

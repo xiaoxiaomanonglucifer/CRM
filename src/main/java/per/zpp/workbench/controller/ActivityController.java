@@ -74,7 +74,7 @@ public class ActivityController {
     @RequestMapping("/queryActivityByConditionForPage")
     public Object queryActivityByConditionForPage(String name, String owner, String startDate,
                                                   String endDate, int pageNo, int pageSize) {
-        System.out.println("name=" + name);
+
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);//key的值和mapper里面的#{}值一致
         map.put("owner", owner);
@@ -221,12 +221,13 @@ public class ActivityController {
         Activity activity= activityService.selectActivityDetailById(id);
         // 对应id的市场活动所有的备注
         List<ActivityRemark> activityRemarkList = activityRemarkService.queryActivityRemarkForDetailByActivityId(id);
-
         // 存入请求域中
         request.setAttribute("activity", activity);
         request.setAttribute("activityRemarkList", activityRemarkList);
         return "/workbench/activity/detail";
     }
+
+
 }
 
 

@@ -74,9 +74,20 @@ public interface ActivityMapper {
 
     List<Activity> selectAllActivity();
 
-    List<Activity> selectActivityById(String []ids);
+    List<Activity> selectActivityById(String[] ids);
 
     int insertActivityByList(List<Activity> activityList);
 
     Activity selectActivityForDetailById(String id);
+
+    List<Activity> selectActivityDetailByClueId(String clueId);
+
+    List<Activity> selectAllActivityForDetailByNameAndClueId(Map<String,Object> map);
+
+    /**
+     * 根据ids查询市场活动的明细信息
+     * @param ids
+     * @return
+     */
+    List<Activity> selectActivityByActivityIds(String []ids);
 }

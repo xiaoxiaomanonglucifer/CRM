@@ -66,7 +66,7 @@
             });
             // 给所有的"删除"图标添加单击事件   如果删除按钮用id的话，那么每一个备注的删除按钮的id都是重复的
             $("#remarkDivList").on("click", "a[name='deleteA']", function () {
-                var id = $(this).attr("remarkId");
+                var id = $(this).attr("remarkId");//获取自定义标签的值
                 $.ajax({
                     url: 'workbench/activity/deleteActivityRemark',
                     type: 'POST',
@@ -87,13 +87,21 @@
 
             });
 
-            $("#remarkDivList").on("click","a[name='editA']",function () {
+            $("#remarkDivList").on("click","a[name='editA']",function () {//第二个参数是选择器的意思 a标签,
                 var id = $(this).attr("remarkId"); // 通过自定义标签获取
                 var noteContent = $("#div_"+id+" h5").text();
                 $("#edit-id").val(id);//将id传到模态窗口中
                 $("#edit-noteContent").val(noteContent); // 写入备注的内容
                 $("#editRemarkModal").modal("show");
             });
+            // $("#a[name='editA']").click(function () {
+            //     var id = $(this).attr("remarkId"); // 通过自定义标签获取
+            //     var noteContent = $("#div_"+id+" h5").text();
+            //     $("#edit-id").val(id);//将id传到模态窗口中
+            //     $("#edit-noteContent").val(noteContent); // 写入备注的内容
+            //     $("#editRemarkModal").modal("show");
+            // })
+
             $("#updateRemarkBtn").click(function () {
                 var id = $("#edit-id").val(); // 修改备注的模态窗口的备注id
                 var noteContent = $.trim($("#edit-noteContent").val()); // 修改备注的模态窗口的备注内容
@@ -289,7 +297,7 @@
             <img title="${remark.createBy}" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
             <div style="position: relative; top: -40px; left: 40px;">
                 <h5>${remark.noteContent}</h5>
-                <font color="gray">市场活动</font> <font color="gray">-</font> <b>${activity.name}</b> <small
+                <font color="gray">市场活动</font> <font color="gray ">-</font> <b>${activity.name}</b> <small
                     style="color: gray;">${remark.editFlag=='1'?remark.editTime:remark.createTime}由${remark.editFlag=='1'?remark.editBy:remark.createBy}${remark.editFlag=='1'?'修改':'创建'}</small>
                 <div style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
                     <a class="myHref" name="editA" id="editA" remarkId="${remark.id}" href="javascript:void(0);"><span
@@ -297,7 +305,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a class="myHref" name="deleteA" id="deleteA" remarkId="${remark.id}"
                        href="javascript:void(0);"><span class="glyphicon glyphicon-remove"
-                                                        style="font-size: 20px; color: #E6E6E6;"></span></a>
+                                                        style="xfont-size: 20px; color: #E6E6E6;"></span></a>
                 </div>
             </div>
         </div>

@@ -217,7 +217,7 @@
                 // }
                 $("#tBody input[type='checkbox']").prop("checked", this.checked);
             });
-            $("tBody").on("click", function () {
+            $("#tBody").on("click", function () {
                 $("#checkAll").prop("checked",
                     $("#tBody input[type='checkbox']").size() == $("#tBody input[type='checkbox']:checked").size())
             });

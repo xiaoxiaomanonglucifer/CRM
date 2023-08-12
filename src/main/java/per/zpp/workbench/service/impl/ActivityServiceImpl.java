@@ -53,7 +53,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> selectActivityById(String []ids) {
+    public List<Activity> selectActivityById(String[] ids) {
         return activityMapper.selectActivityById(ids);
     }
 
@@ -65,6 +65,21 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Activity selectActivityDetailById(String id) {
         return activityMapper.selectActivityForDetailById(id);
+    }
+
+    @Override
+    public List<Activity> queryActivityByClueId(String clueId) {
+        return activityMapper.selectActivityDetailByClueId(clueId);
+    }
+
+    @Override
+    public List<Activity> queryActivityForDetailByNameAndClueId(Map<String, Object> map) {
+        return activityMapper.selectAllActivityForDetailByNameAndClueId(map);
+    }
+
+    @Override
+    public List<Activity> queryActivityByActivityIds(String[] ids) {
+        return activityMapper.selectActivityByActivityIds(ids);
     }
 
 }
