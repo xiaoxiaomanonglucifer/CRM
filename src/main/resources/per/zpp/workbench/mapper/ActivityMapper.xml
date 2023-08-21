@@ -153,6 +153,56 @@
             #{id}
         </foreach>
     </select>
+    <select id="selectActivityForConvertByNameAndClueId" resultType="per.zpp.workbench.domain.Activity">
+        select a.id,a.name,a.start_date,a.end_date,u.name as owner
+        from tbl_activity a
+        join tbl_user u on a.owner=u.id
+        where a.name like '%' #{activityName} '%' and a.id in (
+        select activity_id
+        from tbl_clue_activity_relation
+        where clue_id=#{clueId}
+        )
+    </select>
+    <select id="selectActivityByActivityName" resultType="per.zpp.workbench.domain.Activity">
+         select a.id,a.name,a.start_date,a.end_date,u.name as owner
+    from tbl_activity a
+    join tbl_user u on a.owner=u.id
+    where a.name like '%' #{activityName} '%';
+    </select>
+    <select id="selectCountOfActivityGroupByOwner" resultType="per.zpp.workbench.domain.FunnelVO">
+  select count(*) as value,u.name as name
+    from tbl_activity a
+      join tbl_user u on a.owner=u.id
+    group by u.name
+    </select>
+    <select id="selectActivityDetailByContactsId" resultType="per.zpp.workbench.domain.Activity">
+              select a.id ,a.name ,a.start_date,a.end_date,u.name as owner
+      from tbl_activity a
+      join tbl_user u on a.owner=u.id
+      join tbl_contacts_activity_relation car on car.activity_id=a.id
+      where car.contacts_id=#{contactsId}
+    </select>
+    <select id="selectActivityByActivityNameAndContactsId" resultType="per.zpp.workbench.domain.Activity">
+          select a.id,a.name,a.start_date,a.end_date,u.name as owner
+        from tbl_activity a
+        join tbl_user u on a.owner=u.id
+        where a.name like '%' #{activityName} '%' and a.id not in (
+        select activity_id
+        from tbl_contacts_activity_relation
+        where contacts_id=#{contactsId}
+        )
+    </select>
+    <select id="selectActivityByActivityNameAndTranId" resultType="per.zpp.workbench.domain.Activity">
+         select a.id,a.name,a.start_date,a.end_date,u.name as owner
+        from tbl_activity a
+        join tbl_user u on a.owner=u.id
+        where a.name like '%' #{activityName} '%' and a.id not in (
+        select activity_id
+        from tbl_tran
+        where id=#{tranId}
+        )
+    </select>
+
     <!--子查询-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--

@@ -66,5 +66,7 @@ public interface DicValueMapper {
      * @param id 字典数据id
      * @return 字典表数据
      */
-    DicValue selectDicValueById(String id);
+    DicValue selectDicValueByStageId(String id);
+
+    String selectStageNoByStageName(String stage);
 }

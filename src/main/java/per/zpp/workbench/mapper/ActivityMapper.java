@@ -1,7 +1,9 @@
 package per.zpp.workbench.mapper;
 
 import per.zpp.workbench.domain.Activity;
+import per.zpp.workbench.domain.FunnelVO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +84,8 @@ public interface ActivityMapper {
 
     List<Activity> selectActivityDetailByClueId(String clueId);
 
+    List<Activity> selectActivityDetailByContactsId(String contactsId);
+
     List<Activity> selectAllActivityForDetailByNameAndClueId(Map<String,Object> map);
 
     /**
@@ -90,4 +94,19 @@ public interface ActivityMapper {
      * @return
      */
     List<Activity> selectActivityByActivityIds(String []ids);
+
+    List<Activity> selectActivityForConvertByNameAndClueId(HashMap<String, Object> map);
+
+
+    List<Activity> selectActivityByActivityName(String activityName);
+
+
+    List<FunnelVO> selectCountOfActivityGroupByOwner();
+
+    List<Activity> selectActivityByActivityNameAndContactsId(HashMap<String, Object> map);
+
+    List<Activity> selectActivityByActivityNameAndTranId(HashMap<String, Object> map);
+
+
+
 }

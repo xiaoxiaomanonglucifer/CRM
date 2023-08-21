@@ -19,7 +19,12 @@ public class DicValueServiceImpl implements DicValueService {
     }
 
     @Override
-    public DicValue queryDicValueById(String id) {
-        return dicValueMapper.selectDicValueById(id);
+    public DicValue queryDicValueByStageId(String id) {
+        return dicValueMapper.selectDicValueByStageId(id);
+    }
+
+    @Override
+    public String queryStageNoByStageName(String stage) {
+        return dicValueMapper.selectStageNoByStageName(stage);
     }
 }

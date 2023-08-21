@@ -115,7 +115,7 @@
             $("#searchBtn").click(function () {
                 queryClueByConditionForPage(1, $("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
 
-            })
+            });
             //给全选加上事件
             $("#checkAllBtn").click(function () {
                 if (this.checked) {
@@ -190,6 +190,7 @@
                         id: id
                     },
                     success: function (resp) {
+                        console.log(resp)
                         $("#edit-id").val(resp.id);
                         $("#edit-clueOwner").val(resp.owner); // 通过设置value值（owner的id）循环遍历出来owner
                         $("#edit-company").val(resp.company);
@@ -256,6 +257,7 @@
                     if(resp.code=="1"){
                         // 关闭模态窗口
                         $("#editClueModal").modal("hide");
+                        $("#checkAllBtn").prop("checked",false);
                         // 刷新线索列表，显示第一页数据，保持每页显示条数不变
                         queryClueByConditionForPage($("#demo_pag1").bs_pagination('getOption', 'currentPage'),
                             $("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
@@ -556,11 +558,6 @@
                         <div class="col-sm-10" style="width: 300px;">
                             <select class="form-control" id="edit-call">
                                 <option></option>
-                                <%--                                <option selected>先生</option>--%>
-                                <%--                                <option>夫人</option>--%>
-                                <%--                                <option>女士</option>--%>
-                                <%--                                <option>博士</option>--%>
-                                <%--                                <option>教授</option>--%>
                                 <c:forEach items="${appellationList}" var="appellation">
                                     <option value="${appellation.id}">${appellation.value}</option>
                                 </c:forEach>
@@ -605,13 +602,6 @@
                         <div class="col-sm-10" style="width: 300px;">
                             <select class="form-control" id="edit-state">
                                 <option></option>
-                                <%--                                <option>试图联系</option>--%>
-                                <%--                                <option>将来联系</option>--%>
-                                <%--                                <option selected>已联系</option>--%>
-                                <%--                                <option>虚假线索</option>--%>
-                                <%--                                <option>丢失线索</option>--%>
-                                <%--                                <option>未联系</option>--%>
-                                <%--                                <option>需要条件</option>--%>
                                 <c:forEach items="${clueStateList}" var="clueState">
                                     <option value="${clueState.id}">${clueState.value}</option>
                                 </c:forEach>
@@ -624,20 +614,6 @@
                         <div class="col-sm-10" style="width: 300px;">
                             <select class="form-control" id="edit-source">
                                 <option></option>
-                                <%--                                <option selected>广告</option>--%>
-                                <%--                                <option>推销电话</option>--%>
-                                <%--                                <option>员工介绍</option>--%>
-                                <%--                                <option>外部介绍</option>--%>
-                                <%--                                <option>在线商场</option>--%>
-                                <%--                                <option>合作伙伴</option>--%>
-                                <%--                                <option>公开媒介</option>--%>
-                                <%--                                <option>销售邮件</option>--%>
-                                <%--                                <option>合作伙伴研讨会</option>--%>
-                                <%--                                <option>内部研讨会</option>--%>
-                                <%--                                <option>交易会</option>--%>
-                                <%--                                <option>web下载</option>--%>
-                                <%--                                <option>web调研</option>--%>
-                                <%--                                <option>聊天</option>--%>
                                 <c:forEach items="${sourceList}" var="source">
                                     <option value="${source.id}">${source.value}</option>
                                 </c:forEach>

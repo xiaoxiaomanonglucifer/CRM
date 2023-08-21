@@ -8,5 +8,7 @@ public interface DicValueService {
 
     List<DicValue> queryDicValueByTypeCode(String typeCode);
 
-    DicValue queryDicValueById(String id);
+    DicValue queryDicValueByStageId(String id);
+
+    String queryStageNoByStageName(String stage);
 }

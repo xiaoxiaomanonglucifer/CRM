@@ -45,6 +45,12 @@
     left join tbl_user u2 on cr.edit_by=u2.id
     where cr.clue_id=#{clueId}
     </select>
+    <select id="selectClueRemarkByClueId" resultType="per.zpp.workbench.domain.ClueRemark">
+        select *
+        from tbl_clue_remark
+        where clue_id=#{clueId}
+
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--
           WARNING - @mbggenerated
@@ -53,6 +59,13 @@
         -->
         delete from tbl_clue_remark
         where id = #{id,jdbcType=CHAR}
+    </delete>
+    <delete id="deleteRemarkByIds">
+        delete from tbl_clue_remark
+        where clue_id in
+        <foreach collection="array" item="id" close=")" open="(" separator=",">
+            #{id}
+        </foreach>
     </delete>
     <insert id="insert" parameterType="per.zpp.workbench.domain.ClueRemark">
         <!--

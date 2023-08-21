@@ -110,6 +110,9 @@
                 });
             });
 
+
+            //修改备注
+
             $("#remarkDivList").on("click", "a[name='editA']", function () {
                 var id = $(this).attr("remarkId");
                 var noteContent = $("#div_" + id + " h5").text();
@@ -135,9 +138,8 @@
                             alert(resp.message);
                         }
                     }
-                })
-
-            })
+                });
+            });
 
             $("#updateClueRemarkBtn").click(function () {
                 var noteContent = $.trim($("#edit-noteContent").val());
@@ -405,7 +407,7 @@
         <h3>${clue.fullname}${clue.appellation} <small>${clue.company}</small></h3>
     </div>
     <div style="position: relative; height: 50px; width: 500px;  top: -72px; left: 700px;">
-        <button type="button" class="btn btn-default" onclick="window.location.href='convert.html';"><span
+        <button type="button" class="btn btn-default" onclick="window.location.href='workbench/clue/toConvertIndex?id='+'${clue.id}';"><span
                 class="glyphicon glyphicon-retweet"></span> 转换
         </button>
 

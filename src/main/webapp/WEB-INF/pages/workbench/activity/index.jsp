@@ -249,7 +249,8 @@
                                 alert(resp.message);
                             }
                         }
-                    })
+                    });
+
                 }
             });
 

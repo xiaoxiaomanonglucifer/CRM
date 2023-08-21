@@ -141,6 +141,12 @@
         left join tbl_user u3 on cl.edit_by=u3.id
         where cl.id=#{id}
     </select>
+    <!--    <select id="selectClueById" resultType="per.zpp.workbench.domain.Clue">-->
+<!--        select *-->
+<!--        from tbl_clue-->
+<!--        where id=#{id}-->
+<!--    </select>-->
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--
           WARNING - @mbggenerated
@@ -413,5 +419,17 @@
         address = #{address,jdbcType=VARCHAR}
         where id = #{id,jdbcType=CHAR}
     </update>
+    <select id="selectClueStageOfClueGroupByClueStage" resultType="string">
+    select d.value as clueStage
+    from tbl_clue c
+    join tbl_dic_value d on c.state = d.id
+    group by c.state
+  </select>
 
+    <select id="selectCountOfClueGroupByClueStage" resultType="java.lang.Integer">
+    select count(*) as value
+    from tbl_clue c
+           join tbl_dic_value d on c.state = d.id
+    group by c.state
+  </select>
 </mapper>

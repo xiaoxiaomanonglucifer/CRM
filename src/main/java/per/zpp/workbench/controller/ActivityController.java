@@ -18,15 +18,13 @@ import per.zpp.settings.domain.User;
 import per.zpp.settings.service.UserService;
 import per.zpp.workbench.domain.Activity;
 import per.zpp.workbench.domain.ActivityRemark;
-import per.zpp.workbench.mapper.ActivityMapper;
 import per.zpp.workbench.service.ActivityRemarkService;
 import per.zpp.workbench.service.ActivityService;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.InputStream;
 import java.util.*;
 
 @RequestMapping("/workbench/activity")
@@ -216,9 +214,9 @@ public class ActivityController {
     }
 
     @RequestMapping("/toDetailIndex")
-    public String toDetailIndex(String id,HttpServletRequest request){
+    public String toDetailIndex(String id, HttpServletRequest request) {
         //根据id查询对应的市场活动的详细信息
-        Activity activity= activityService.selectActivityDetailById(id);
+        Activity activity = activityService.selectActivityDetailById(id);
         // 对应id的市场活动所有的备注
         List<ActivityRemark> activityRemarkList = activityRemarkService.queryActivityRemarkForDetailByActivityId(id);
         // 存入请求域中
@@ -227,7 +225,29 @@ public class ActivityController {
         return "/workbench/activity/detail";
     }
 
+    @RequestMapping("/queryActivityByActivityNameAndContactsId")
+    @ResponseBody
+    public Object queryActivityByActivityNameAndContactsId(String activityName, String contactsId) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("activityName", activityName);
+        map.put("contactsId", contactsId);
+        List<Activity> activityList = activityService.queryActivityByActivityNameAndContactsId(map);
+        return activityList;
 
+
+    }
+
+    @RequestMapping("/queryActivityByActivityNameAndTranId")
+    @ResponseBody
+    public Object queryActivityByActivityNameAndTranId(String activityName, String tranId) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("activityName", activityName);
+        map.put("tranId", tranId);
+        List<Activity> activityList = activityService.queryActivityByActivityNameAndTranId(map);
+        return activityList;
+
+
+    }
 }
 
 

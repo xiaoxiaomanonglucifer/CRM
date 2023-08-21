@@ -105,12 +105,13 @@ public class ClueController {
     @ResponseBody
     public Object deleteClueByIds(String[] id) {
         ReturnObject returnObject = new ReturnObject();
-        int key = clueService.deleteClueByIds(id);
-        if (key > 0) {
+        try {
+            clueService.deleteClueByIds(id);
             returnObject.setCode(SystemConstant.SUCCESS_CODE);
-        } else {
+        } catch (Exception e) {
+            e.printStackTrace();
             returnObject.setCode(SystemConstant.FAIL_CODE);
-            returnObject.setMessage("系统繁忙，稍后重试~");
+            returnObject.setMessage("系统繁忙请重试");
         }
         return returnObject;
     }
@@ -213,5 +214,48 @@ public class ClueController {
         return returnObject;
     }
 
+    @RequestMapping("/toConvertIndex")
+    public String toConvertIndex(String id, HttpServletRequest request) {
+        List<DicValue> stageList = dicValueService.queryDicValueByTypeCode("stage");
+        request.setAttribute("stageList", stageList);
+        Clue clue = clueService.selectDetailById(id);
+        request.setAttribute("clue", clue);
+        return "/workbench/clue/convert";
+    }
+
+    @ResponseBody
+    @RequestMapping("/queryActivityForConvertByNameAndClueId")
+    public Object queryActivityForConvertByNameAndClueId(String activityName, String clueId) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("activityName", activityName);
+        map.put("clueId", clueId);
+        List<Activity> activities = activityService.queryActivityForConvertByNameAndClueId(map);
+        return activities;
+    }
+
+    @RequestMapping("/saveConvertClue")
+    @ResponseBody
+    public Object saveConvertClue(String clueId, String money, String name, String expectedDate, String stage, String activityId, String isCreateTran, HttpSession session) {
+        HashMap<String, Object> map = new HashMap<>();
+        User user = (User) session.getAttribute(SystemConstant.SESSION_USER);
+        map.put("clueId", clueId);
+        map.put("money", money);
+        map.put("name", name);
+        map.put("expectedDate", expectedDate);
+        map.put("stage", stage);
+        map.put("activityId", activityId);
+        map.put("isCreateTran", isCreateTran);
+        map.put(SystemConstant.SESSION_USER, user);
+        ReturnObject returnObject = new ReturnObject();
+        try {
+            clueService.saveConvert(map);
+            returnObject.setCode(SystemConstant.SUCCESS_CODE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            returnObject.setCode(SystemConstant.FAIL_CODE);
+            returnObject.setMessage("系统忙~");
+        }
+        return returnObject;
+    }
 
 }

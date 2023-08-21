@@ -1,6 +1,7 @@
 package per.zpp.workbench.mapper;
 
 import per.zpp.workbench.domain.Clue;
+import per.zpp.workbench.domain.FunnelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -65,5 +66,13 @@ public interface ClueMapper {
     Clue queryClueById(String id);
 
     Clue selectClueDetailById(String id);
+
+    List<String> selectClueStageOfClueGroupByClueStage();
+
+    List<Integer> selectCountOfClueGroupByClueStage();
 //    int updateClueById(Clue clue);
+
+//        Clue selectClueById(String id);
+
+
 }

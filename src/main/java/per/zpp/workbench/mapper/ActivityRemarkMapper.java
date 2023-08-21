@@ -58,4 +58,5 @@ public interface ActivityRemarkMapper {
 
     int updateRemarkById(ActivityRemark remark);
 
+    void deleteRemarkByIds(String[] ids);
 }

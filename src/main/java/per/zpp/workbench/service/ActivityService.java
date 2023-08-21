@@ -1,7 +1,9 @@
 package per.zpp.workbench.service;
 
 import per.zpp.workbench.domain.Activity;
+import per.zpp.workbench.domain.FunnelVO;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,4 +34,16 @@ public interface ActivityService {
     List<Activity> queryActivityForDetailByNameAndClueId(Map<String,Object> map);
 
     List<Activity> queryActivityByActivityIds(String ids[]);
+
+    List<Activity> queryActivityForConvertByNameAndClueId(HashMap<String, Object> map);
+
+    List<Activity> queryActivityByActivityName(String activityName);
+
+    List<FunnelVO> queryCountOfActivityGroupByOwner();
+
+    List<Activity>queryActivityByContactsId(String id);
+
+    List<Activity> queryActivityByActivityNameAndContactsId(HashMap<String, Object> map);
+
+    List<Activity> queryActivityByActivityNameAndTranId(HashMap<String, Object> map);
 }

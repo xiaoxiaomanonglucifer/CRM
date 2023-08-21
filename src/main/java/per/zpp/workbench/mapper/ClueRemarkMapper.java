@@ -53,8 +53,12 @@ public interface ClueRemarkMapper {
      */
     int updateByPrimaryKey(ClueRemark record);
 
+    //需要联表查询名字
     List<ClueRemark> selectClueRemarkDetailById(String id);
 
+    //不用联表查询查名字
+    List<ClueRemark> selectClueRemarkByClueId(String clueId);
     int updateClueRemarkById(ClueRemark clueRemark);
 
+    void deleteRemarkByIds(String[] ids);
 }

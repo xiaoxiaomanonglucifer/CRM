@@ -32,6 +32,12 @@
         from tbl_clue_activity_relation
         where id = #{id,jdbcType=CHAR}
     </select>
+    <select id="selectClueActivityRelationByClueId" resultType="per.zpp.workbench.domain.ClueActivityRelation">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_clue_activity_relation
+        where clue_id=#{clueId}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         <!--
@@ -47,6 +53,13 @@
    delete from tbl_clue_activity_relation
     where clue_id=#{clueId} and activity_id=#{activityId}
   </delete>
+    <delete id="deleteActivityRelationByIds">
+           delete from tbl_clue_activity_relation
+        where clue_id in
+        <foreach collection="array" item="id" close=")" open="(" separator=",">
+            #{id}
+        </foreach>
+    </delete>
     <insert id="insert" parameterType="per.zpp.workbench.domain.ClueActivityRelation">
         <!--
           WARNING - @mbggenerated

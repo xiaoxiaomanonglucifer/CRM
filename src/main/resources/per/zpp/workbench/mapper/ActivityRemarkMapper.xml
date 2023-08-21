@@ -56,6 +56,13 @@
         delete from tbl_activity_remark
         where id = #{id,jdbcType=CHAR}
     </delete>
+    <delete id="deleteRemarkByIds">
+          delete from tbl_activity_remark
+          where activity_id in
+        <foreach collection="array" item="id" close=")" open="(" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 
     <insert id="insert" parameterType="per.zpp.workbench.domain.ActivityRemark">
         <!--
