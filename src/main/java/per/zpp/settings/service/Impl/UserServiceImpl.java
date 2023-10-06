@@ -16,6 +16,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    public User selectById(String id) {
+      return   userMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public User selectUserByLoginActAndPwd(Map<String, Object> map) {
         return userMapper.selectUserByLoginActAndPwd(map);
     }

@@ -9,11 +9,12 @@ public class indexController {
     按理说给controller分配url应该写 http://127.0.0.1:8080/crm/
     为了简便 ://ip:port/应用名称必须省去
      */
-        @RequestMapping("/")
+            @RequestMapping("/")
     public String index(){
             //请求转发地址不会变 前缀不会变，不能用重定向
 //        return "/WEB-INF/pages/first.jsp"; 完整路径写法
             return "index";//配置了视图解析器之后的写法(加了前缀和后缀)
+                //WEB_INF/index.jsp
     }
 
 }

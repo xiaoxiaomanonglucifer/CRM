@@ -30,23 +30,23 @@
     </bean>
 
     <!-- 配置事务管理器 -->
-<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-<!--        <property name="dataSource" ref="dataSource"/>-->
-<!--    </bean>-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
     <!-- 配置事务 -->
-<!--<aop:config>                                                    &lt;!&ndash; 第一个.*表示所有类 第二个.* -》所有方法 (..)-》所有参数 &ndash;&gt;-->
-<!--        <aop:pointcut expression="execution(* per.zpp.settings.service.*.*(..))" id="allMethodPointcut"/>-->
-<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethodPointcut"/>-->
-<!--    </aop:config>-->
-<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-<!--        <tx:attributes>-->
-<!--            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>-->
-<!--            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>-->
-<!--            <tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception"/>-->
-<!--            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>-->
-<!--            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>-->
-<!--            <tx:method name="do*" propagation="REQUIRED" rollback-for="Exception"/>-->
-<!--            <tx:method name="*" propagation="REQUIRED" read-only="true"/>-->
-<!--        </tx:attributes>-->
-<!--    </tx:advice>-->
+<aop:config>                                                    <!-- 第一个.*表示所有类 第二个.* -》所有方法 (..)-》所有参数 -->
+        <aop:pointcut expression="execution(* per.zpp.settings.service.*.*(..))" id="allMethodPointcut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="allMethodPointcut"/>
+    </aop:config>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="do*" propagation="REQUIRED" rollback-for="Exception"/>
+            <tx:method name="*" propagation="REQUIRED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
 </beans>

@@ -1,11 +1,18 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+//动态获取路径
+%>
 <html>
 <head>
+	<base href="<%=basePath%>">
 <meta charset="UTF-8">
-<link href="../../../../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 
-<script type="text/javascript" src="../../../../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../../../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -82,21 +89,21 @@
 				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>1</td>
-					<td><a href="detail.html" style="text-decoration: none;">001</a></td>
+					<td><a href="detail.jsp" style="text-decoration: none;">001</a></td>
 					<td>管理员</td>
 					<td>管理员为最高角色，拥有所有许可</td>
 				</tr>
 				<tr>
 					<td><input type="checkbox" /></td>
 					<td>2</td>
-					<td><a href="detail.html" style="text-decoration: none;">002</a></td>
+					<td><a href="detail.jsp" style="text-decoration: none;">002</a></td>
 					<td>销售总监</td>
 					<td>销售总监销售总监销售总监销售总监销售总监</td>
 				</tr>
 				<tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>3</td>
-					<td><a href="detail.html" style="text-decoration: none;">003</a></td>
+					<td><a href="detail.jsp" style="text-decoration: none;">003</a></td>
 					<td>市场总监</td>
 					<td>市场总监市场总监市场总监市场总监</td>
 				</tr>

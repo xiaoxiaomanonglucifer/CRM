@@ -337,6 +337,9 @@
                 type: 'POST',
                 dataType: 'JSON',
                 success: function (resp) {
+                    console.log(resp);
+                    console.log(resp.activityList);
+
                     //没用工具插件时的显示页数
                     //显示总条数
                     //   $("#totalCountB").text(resp.totalCount);

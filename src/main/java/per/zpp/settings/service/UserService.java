@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
+    User selectById(String id);
 
-    User selectUserByLoginActAndPwd(Map<String,Object> map);
+    User selectUserByLoginActAndPwd(Map<String, Object> map);
 
     List<User> queryAllUsers();
 }

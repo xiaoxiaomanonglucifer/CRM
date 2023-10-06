@@ -1,7 +1,6 @@
 package per.zpp.settings.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,13 +14,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/settings/qx/user")//和方法的RequestMapping结合形成一个在浏览器地址上显示的路径
+//和方法的RequestMapping结合形成一个在浏览器地址上显示的路径
 public class UserController {
     @Autowired
     private UserService userService;
@@ -30,7 +28,7 @@ public class UserController {
     url要和controller方法处理完请求之后响应信息返回的页面的资源目录保持一致
      */
 //    @RequestMapping("/WEB-INF/pages/settings/qx/user/toLoginIn.do")
-    @RequestMapping("/toLogin")
+    @RequestMapping("/settings/qx/user/toLogin")
     public String toLogin() {
         return "settings/qx/user/login";//结合springmvc里面的配置文件视图解析器返回一个url：
         //(WEB-INF/pages/)settings/qx/user/login(.jsp)
@@ -48,7 +46,7 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping("/settings/qx/user/login")
     public @ResponseBody
     Object login(String loginAct, String loginPwd, String isRemPwd, HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 //        System.out.println(request.getScheme());
@@ -84,7 +82,6 @@ public class UserController {
             } else {
                 returnObject.setCode(SystemConstant.SUCCESS_CODE);
                 session.setAttribute(SystemConstant.SESSION_USER, user);
-
                 Cookie c1;
                 Cookie c2;
                 if ("true".equals(isRemPwd)) {
@@ -105,10 +102,11 @@ public class UserController {
         }
         return returnObject;
     }
-    @RequestMapping("/logout")
-    public String logout(HttpServletResponse response,HttpSession session){
+
+    @RequestMapping("/settings/qx/user/logout")
+    public String logout(HttpServletResponse response, HttpSession session) {
         //清空cookie
-        Cookie  c1 = new Cookie("loginAct", "1");
+        Cookie c1 = new Cookie("loginAct", "1");
         Cookie c2 = new Cookie("loginPwd", "1");
         c1.setMaxAge(0);
         c2.setMaxAge(0);
@@ -120,5 +118,18 @@ public class UserController {
     }
 //    http://localhost:8080/CRM/settings/qx/user/toLogin
 //    http://localhost:8080/settings/qx/user/logout
+
+    @RequestMapping("/settings/qx/toIndex")
+    public String toIndex(HttpSession session, HttpServletRequest request) {
+        User user = (User) session.getAttribute(SystemConstant.SESSION_USER);
+        request.setAttribute("user", user);
+        return "settings/qx/index";
+    }
+
+    @RequestMapping("/settings/qx/user/toUserIndex")
+    public String toUserIndex() {
+        return "settings/qx/user/index";
+    }
+
 
 }
