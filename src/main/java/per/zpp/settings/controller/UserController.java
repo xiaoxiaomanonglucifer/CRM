@@ -53,7 +53,7 @@ public class UserController {
 //        System.out.println(request.getServerName());
 //        System.out.println(request.getServerPort());
 //        System.out.println(request.getContextPath());
-
+        System.out.println(request.getRemoteAddr());
         Map<String, Object> map = new HashMap<>();
         map.put("loginAct", loginAct);//""里面的要和mapper.xml里面的{}里面的名称一致
         map.put("loginPwd", loginPwd);

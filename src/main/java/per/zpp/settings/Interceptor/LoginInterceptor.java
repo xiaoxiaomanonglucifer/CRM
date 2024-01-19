@@ -1,6 +1,5 @@
 package per.zpp.settings.Interceptor;
 
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import per.zpp.commons.constants.SystemConstant;
 import per.zpp.settings.domain.User;
